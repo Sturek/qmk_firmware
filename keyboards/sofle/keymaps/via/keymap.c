@@ -2,6 +2,8 @@
 #include "oled.c"
 #include "encoder.c"
 
+//Default keymap. This can be changed in Via. Use oled.c and encoder.c to change beavior that Via cannot change.
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY

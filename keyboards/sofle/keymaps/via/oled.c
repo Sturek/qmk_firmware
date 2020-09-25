@@ -1,3 +1,5 @@
+//Sets up what the OLED screens display.
+
 #ifdef OLED_DRIVER_ENABLE
 
 static void render_logo(void) {

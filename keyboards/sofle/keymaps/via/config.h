@@ -5,7 +5,7 @@ see https://docs.qmk.fm/#/feature_split_keyboard?id=setting-handedness
 for more options.
 */
 
-//Underglow
+//Add RGB underglow
 #define RGB_DI_PIN D3
 #define RGBLED_NUM 14
 #define RGBLED_SPLIT {7,7}
