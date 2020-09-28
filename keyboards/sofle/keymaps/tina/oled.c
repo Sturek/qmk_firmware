@@ -1,3 +1,6 @@
+//#include <stdio.h>
+//char wpm_str[10];
+
 #ifdef OLED_DRIVER_ENABLE
 
 // WPM-responsive animation stuff here
@@ -11,7 +14,7 @@
 
 #define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
 // #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
-#define ANIM_SIZE 470 // number of bytes in array, minimize for adequate firmware size, max is 1024
+#define ANIM_SIZE 456    // number of bytes in array, minimize for adequate firmware size, max is 1024
 
 uint32_t anim_timer = 0;
 uint32_t anim_sleep = 0;
@@ -105,41 +108,45 @@ static void render_anim(void) {
 
 
 static void print_status_narrow(void) {
-    // Print current mode
-    oled_write_P(PSTR("\n\n"), false);
-
-    switch (get_highest_layer(layer_state)) {
-        case 0:
-            oled_write_ln_P(PSTR("Qwrt"), false);
-            break;
-        case 1:
-            oled_write_ln_P(PSTR("Clmk"), false);
-            break;
-        default:
-            oled_write_P(PSTR("Mod\n"), false);
-            break;
-    }
-    oled_write_P(PSTR("\n\n"), false);
     // Print current layer
     oled_write_ln_P(PSTR("LAYER"), false);
     switch (get_highest_layer(layer_state)) {
         case 0:
+            oled_write_P(PSTR("Base\n\n\n"), false);
+            break;
         case 1:
-            oled_write_P(PSTR("Base\n"), false);
+            oled_write_P(PSTR("Fade\n\nIn\n"), false);
             break;
         case 2:
-            oled_write_P(PSTR("Raise"), false);
+            oled_write_P(PSTR("Smbls\nF-Row"), false);
             break;
         case 3:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_P(PSTR("Fnctn\nMedia"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
-    oled_write_P(PSTR("\n\n"), false);
-    led_t led_usb_state = host_keyboard_led_state();
-    oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+    
+    oled_write_P(PSTR("\n.oOo.\n"), false);
+    
+    if(get_current_wpm() <= 30){
+        oled_write_ln_P(PSTR("Sofle\nready"), false);   
+    }
+    if(get_current_wpm() > 30 && get_current_wpm() < 80){
+        oled_write_ln_P(PSTR("Thock\nThock"), false);
+    }
+    if(get_current_wpm() >= 80){
+        oled_write_ln_P(PSTR("Click\nClack"), false);
+    }
+    oled_write_P(PSTR("~~~~~"), false);
+    oled_write_P(PSTR("d^.^b"), false);
+    //oled_write_P(PSTR("\n\n"), false);
+    //oled_write_P(PSTR("      "), false);
+    //sprintf(wpm_str, "%03d", get_current_wpm());
+    //oled_write(wpm_str, false);
+    //oled_write_P(PSTR("   WPM"), false);
 }
+
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
