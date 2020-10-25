@@ -6,6 +6,8 @@ for more options.
 */
 
 #define OLED_TIMEOUT 180000
+#undef TAPPING_TERM
+#define TAPPING_TERM 200
 
 //Underglow
 #define RGB_DI_PIN D3
