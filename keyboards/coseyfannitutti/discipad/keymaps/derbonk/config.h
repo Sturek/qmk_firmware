@@ -14,8 +14,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-// #define USB_MAX_POWER_CONSUMPTION 100
+#undef USB_MAX_POWER_CONSUMPTION
+#define USB_MAX_POWER_CONSUMPTION 200
 
 #define RGB_DI_PIN C5
-#define RGBLED_NUM 5
+#define RGBLED_NUM 10
+#define RGBLIGHT_ANIMATIONS
